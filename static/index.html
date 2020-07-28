@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
+
+    <title>Edibo</title>
+</head>
+<body>
+    <h1>Edibo Canvas Project with <b>WebSocket</b></h1>
+    <div class="container">
+        <div>
+            <h2>You</h2>
+            <canvas id="canvas_single" width="500" height="500"></canvas>
+            <button id="canvas_single_btn">Send</button>
+        </div>
+        
+        <div>
+            <h2>World</h2>
+            <canvas id="canvas_world" width="500" height="500"></canvas>
+        </div>
+    </div>
+    <footer>
+        <div>
+            <p>Copyright 2020 Bogdans Gromovs</p>
+        </div>
+    </footer>
+    <script src="./js/canvas.js"></script>
+    <script src="./js/socket.js"></script>
+</body>
+</html> 
