@@ -23,7 +23,7 @@ import { GatewayService } from './app.service';
   handleMessage(client: Socket, payload: object): void {
    this.server.emit('msgToClient', payload);
 
-   this.gatewayService.getHello(payload, client.id)
+   this.gatewayService.saveToJSON(payload, client.id)
   }
  
   afterInit(server: Server) {
@@ -32,6 +32,7 @@ import { GatewayService } from './app.service';
  
   handleDisconnect(client: Socket) {
    this.logger.log(`Client disconnected: ${client.id}`);
+   this.gatewayService.deleteFromJson(client.id)
   }
  
   handleConnection(client: Socket, ...args: any[]) {

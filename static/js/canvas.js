@@ -75,7 +75,6 @@ class Single {
     }
 
     // ### TOOLS ###
-
     sleep(ms) {
         return new Promise(resolve => setTimeout(resolve, ms));
     }

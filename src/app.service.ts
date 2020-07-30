@@ -1,11 +1,5 @@
-// fs = require('writeFile');
-// fs.writeFile('helloworld.txt', 'Hello World!', function (err) {
-//   if (err) return console.log(err);
-//   console.log('Hello World > helloworld.txt');
-// });
-
-// import { writeFile } from 'fs'
 const fs = require('fs');
+const path = require('path');
 import { Injectable } from '@nestjs/common';
 
 @Injectable()
@@ -17,9 +11,42 @@ export class AppService {
 
 @Injectable()
 export class GatewayService {
-  getHello(data: object, id: string): void {
-    console.log('DATA', data)
-    fs.writeFile('./upload/paints.json', `cliendID: ${id}\n\n\n`, (err) => console.log(err))
-    fs.appendFile('./upload/paints.json', JSON.stringify(data), (err) => console.log(err))
+  saveToJSON(data: object, id: string): void {
+    fs.readFile('./upload/paints.json', { encoding: 'utf8' }, (err, prevData) => {
+      if(err) {
+        console.error('Error read file', err);
+      } else {
+        const json = !prevData.length ? {images: {}} : JSON.parse(prevData)
+
+        if (!json.images[id]) json.images[id] = []
+        json.images[id].push(data)
+
+        try {
+          fs.writeFileSync('./upload/paints.json', JSON.stringify(json));
+          console.log("File has been saved.");
+        } catch (error) {
+            console.error('Error write file:', err);
+        }
+      }
+    })
+  }
+
+  deleteFromJson(id) {
+    fs.readFile('./upload/paints.json', { encoding: 'utf8' }, (err, prevData) => {
+      if(err) {
+        console.error('Error read file', err);
+      } else {
+        const json = JSON.parse(prevData)
+        delete json.images[id]
+
+        try {
+          fs.writeFileSync('./upload/paints.json', JSON.stringify(json));
+          console.log(`Guy with that id ${id} gone.`)
+          console.log("File has been saved.");
+        } catch (error) {
+          console.error('Error write file:', err);
+        }
+      }
+    })
   }
 }
