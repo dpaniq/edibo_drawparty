@@ -41,6 +41,19 @@ class Single {
         })
     }
 
+    destroy() {
+        this.startDrawTime = 0
+        this.image = []
+
+        const w = this.c.width
+        this.c.width = 0
+        this.c.width = w
+
+        this.ctx.clearRect(0,0, 500, 500)
+        // context.clearRect(0, 0, 500, 500)
+        // console.log(this.image)
+    }
+
     draw() {
         const last = this.getPreLast()
 
@@ -52,6 +65,7 @@ class Single {
     // World
     async repeat (payload) {
         for (let i = 1; i < payload.length - 1; i++) {
+            this.ctx.beginPath();
             this.ctx.moveTo(payload[i].x_from, payload[i].y_from)
             this.ctx.lineTo(payload[i].x_moveTo, payload[i].y_moveTo)
             this.ctx.stroke()
@@ -73,6 +87,7 @@ const btn = document.getElementById('canvas_single_btn')
 btn.addEventListener('click', ev => {
     single.image.pop()
     socket.emit('msgToServer', single.image)
+    single.destroy()
 })
 
 

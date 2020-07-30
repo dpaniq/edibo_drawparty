@@ -1,14 +1,18 @@
 * {
     padding: 0;
     margin: 0;
-    box-sizing: border-box;  
+    box-sizing: border-box; 
+    font-family: 'Roboto', sans-serif; 
+}
+
+body {
+    background-image: url(../img/bg.png);
 }
 
 .container {
     width: 100%;
     display: flex;
     flex-direction: row;
-    background-color: antiquewhite;
     justify-content: center;
 }
 
@@ -17,6 +21,25 @@ canvas {
     border:1px solid #000000;
     width: 500px;
     height: 500px;
+    background-color: rgba(0, 0, 0, 0.09);
+}
+
+.canvas_container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.btn {
+    margin: 0.2em 0;
+    padding: 0.5em 2em;
+    font-weight: bolder;
+    border: 1px solid #ccc;
+}
+
+.btn:hover {
+    background-color: #ccc;
+    
 }
 
 footer {
